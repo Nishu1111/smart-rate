@@ -44,7 +44,7 @@ class RatingViewSet(viewsets.ModelViewSet):
 
 # CSV Export View
 @api_view(['GET'])
-@permission_classes([permissions.IsAuthenticated])
+#@permission_classes([permissions.IsAuthenticated])
 def export_ratings_csv(request):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="ratings.csv"'
