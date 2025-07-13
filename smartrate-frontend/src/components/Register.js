@@ -31,7 +31,7 @@ function Register() {
         <option value="admin">Admin</option>
       </select>
       <button type="submit" className="bg-blue-500 text-white p-2 rounded w-full">Register</button>
-      <Link to="/" className="block text-center text-blue-600 mt-2">Back to Login</Link>
+      <Link to="/login" className="block text-center text-blue-600 mt-2">Back to Login</Link>
     </form>
   );
 }

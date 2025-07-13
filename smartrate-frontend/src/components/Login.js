@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 function Login() {
   const navigate = useNavigate();
@@ -21,15 +21,15 @@ function Login() {
       alert('Invalid credentials');
     }
   };
+  
 
   return (
-    <form onSubmit={handleLogin}>
-      <h2>Login</h2>
-      <input type="text" placeholder="Username"
-        value={username} onChange={(e) => setUsername(e.target.value)} />
-      <input type="password" placeholder="Password"
-        value={password} onChange={(e) => setPassword(e.target.value)} />
-      <button type="submit">Login</button>
+    <form onSubmit={handleLogin} className="max-w-sm mx-auto mt-10 p-5 border rounded shadow">
+      <h2 className="text-xl mb-4">Sign in</h2>
+      <input name="username" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} className="border p-2 mb-2 w-full" />
+      <input name="password" type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} className="border p-2 mb-2 w-full" />
+      <button type="submit" className="bg-blue-500 text-white p-2 rounded w-full">Login</button>
+      <Link to="/register" className="block text-center text-blue-600 mt-2">Create an account</Link>
     </form>
   );
 }
