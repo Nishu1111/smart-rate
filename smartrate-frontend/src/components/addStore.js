@@ -6,7 +6,7 @@ function AddStore() {
   const [desc, setDesc] = useState('');
   const [image, setImage] = useState(null);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => { 
     e.preventDefault();
     const token = localStorage.getItem('access');
     const formData = new FormData();

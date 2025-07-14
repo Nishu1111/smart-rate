@@ -1,98 +1,7 @@
-// import React, { useState, useEffect } from 'react';
-// import axios from 'axios';
 
-// function Dashboard() {
-//   const [stores, setStores] = useState([]);
-//   const [ratings, setRatings] = useState([]);
-//   const [users, setUsers] = useState([]);
-//   const [role, setRole] = useState('');
-
-
-//   const fetchUsers = async () => {
-//     const token = localStorage.getItem('access');
-//     const config = { headers: { Authorization: `Bearer ${token}` } };
-//     const res = await axios.get('http://127.0.0.1:8000/api/users/', config);
-//     setUsers(res.data);
-//   };
-//   const fetchData = async () => {
-//     const token = localStorage.getItem('access');
-//     const config = { headers: { Authorization: `Bearer ${token}` } };
-//     const storesRes = await axios.get('http://127.0.0.1:8000/api/stores/', config);
-//     const ratingsRes = await axios.get('http://127.0.0.1:8000/api/ratings/', config);
-//     const res = await axios.get('http://127.0.0.1:8000/api/users/', config);
-//     setUsers(res.data);
-//     setStores(storesRes.data);
-//     setRatings(ratingsRes.data);
-//   };
-//   const handleToggleActive = async (user) => {
-//     const token = localStorage.getItem('access');
-//     const config = { headers: { Authorization: `Bearer ${token}` } };
-//     await axios.put(`http://127.0.0.1:8000/api/users/${user.id}/`, {
-//       is_active: !user.is_active,
-//     }, config);
-//     fetchUsers();
-//   };
-
-//   const handleMakeAdmin = async (user) => {
-//     const token = localStorage.getItem('access');
-//     const config = { headers: { Authorization: `Bearer ${token}` } };
-//     await axios.put(`http://127.0.0.1:8000/api/users/${user.id}/`, {
-//       is_staff: !user.is_staff,
-//     }, config);
-//     fetchUsers();
-//   };
-
-// // useEffect(() => {
-// //   const storedRole = localStorage.getItem('role'); // or get from backend
-// //   setRole(storedRole);
-
-// //   fetchData();
-
-// //   if (storedRole === 'admin') {
-// //     fetchUsers();
-// //   }
-// // }, []);
-//      useEffect(() => {
-//        fetchData();
-
-//        if (role === 'admin') {
-//          fetchUsers();
-//        }
-//      }, []);
-
-//   // useEffect(() => {
-//   //   fetchData();
-//   // }, []);
-// const exportCSV = () => {
-//   const token = localStorage.getItem('access');
-//   window.open(`http://127.0.0.1:8000/api/export-csv/?token=${token}`);
-// };
-
-//   return (
-//     <div>
-//       <h2>Dashboard</h2>
-//       <h3>Stores</h3>
-//       <ul>
-//         {stores.map(store => (
-//           <li key={store.id}>{store.name}</li>
-//         ))}
-//       </ul>
-
-//       <h3>Ratings</h3>
-//       <ul>
-//         {ratings.map(rating => (
-//           <li key={rating.id}>{rating.store} - {rating.score}</li>
-//         ))}
-//       </ul>
-
-//       <button onClick={exportCSV}>Download CSV</button>
-//     </div>
-//   );
-// }
-
-// export default Dashboard;
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import EditStore from './EditStore';
 
 function Dashboard() {
   const [stores, setStores] = useState([]);
@@ -107,9 +16,18 @@ function Dashboard() {
 
     const storesRes = await axios.get('http://127.0.0.1:8000/api/stores/', config);
     const ratingsRes = await axios.get('http://127.0.0.1:8000/api/ratings/', config);
-
+  
     setStores(storesRes.data);
     setRatings(ratingsRes.data);
+  };
+  // delete store if needed
+  const handleDelete = async (storeId) => {
+    const token = localStorage.getItem('access');
+    await axios.delete(`http://127.0.0.1:8000/api/stores/${storeId}/`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    alert('Store deleted!');
+    window.location.reload(); // Or refresh your state
   };
 
   // Fetch all Users (Admin only)
@@ -144,7 +62,6 @@ function Dashboard() {
 
     fetchUsers();
   };
-
 
   // CSV Export
   const exportCSV = () => {
@@ -186,7 +103,28 @@ function Dashboard() {
           </li>
         ))}
       </ul>
+       <ul>
+              {stores.map(store => (
 
+                            <li key={store.id} className="border p-2 mb-2 rounded shadow">
+                             <h4 className="font-bold">{store.name}</h4>
+
+                                {/* Show the EditStore form */}
+                              <EditStore
+                                storeId={store.id}
+                                onUpdated={() => window.location.reload()}
+                               />
+
+                               {/* Optional: Delete button */}
+                                <button
+                                 onClick={() => handleDelete(store.id)}
+                                  className="bg-red-600 text-white px-2 py-1 rounded mt-2"
+                                 >
+                                   Delete
+                                </button>
+                            </li>
+                       ))}
+                    </ul>
       {/* CSV Export */}
       <button
         onClick={exportCSV}
@@ -241,3 +179,4 @@ function Dashboard() {
 }
 
 export default Dashboard;
+

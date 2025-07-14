@@ -14,15 +14,18 @@ function Login() {
         username,
         password
       });
-      localStorage.setItem('access', response.data.access);
-      localStorage.setItem('refresh', response.data.refresh);
-      localStorage.setItem('role', response.data.role);
+      console.log(response.data); //to verify you get user_id
+
+    localStorage.setItem('access', response.data.access);
+    localStorage.setItem('refresh', response.data.refresh);
+    localStorage.setItem('role', response.data.role);
+    localStorage.setItem('user_id', response.data.user_id);
+
       navigate('/dashboard');
     } catch (error) {
       alert('Invalid credentials');
     }
   };
-  
 
   return (
     <form onSubmit={handleLogin} className="max-w-sm mx-auto mt-10 p-5 border rounded shadow">
@@ -35,4 +38,6 @@ function Login() {
   );
 }
 
-export default Login;
+export default Login; 
+
+

@@ -17,21 +17,20 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 
 User = get_user_model()
-
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
-
-        # Add custom claims
         token['username'] = user.username
         token['role'] = user.role
         token['is_staff'] = user.is_staff
+        token['user_id'] = user.id   
         return token
 
     def validate(self, attrs):
         data = super().validate(attrs)
         data['role'] = self.user.role
+        data['user_id'] = self.user.id   
         return data
 
 class MyTokenObtainPairView(TokenObtainPairView):
@@ -41,12 +40,13 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'username', 'email', 'is_active', 'is_staff', 'role']
-        read_only_fields = ['id', 'username', 'email']
+        read_only_fields = ['id', 'username', 'email']  
 
-# class UserSerializer(ModelSerializer):
-#     class Meta:
-#         model = User
-#         fields = ['id', 'username', 'email', 'is_active', 'is_staff', 'role']  
+
+class StoreSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Store
+        fields = '__all__'
 
 class UserListView(generics.ListAPIView):
     queryset = User.objects.all()
@@ -65,9 +65,7 @@ class RegisterAPI(generics.CreateAPIView):
 class StoreViewSet(viewsets.ModelViewSet):
     queryset = Store.objects.all()
     serializer_class = StoreSerializer
-#    permission_classes = [permissions.IsAuthenticated]
 
- 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
