@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from rest_framework import generics, permissions, viewsets
 from rest_framework.decorators import api_view
-from django.contrib.auth import get_user_model  # ✅ Good!
+from django.contrib.auth import get_user_model  
 from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers ####
+
 from .models import Store, Rating
 from .serializers import (
     RegisterSerializer,
@@ -12,6 +14,7 @@ import csv
 from django.http import HttpResponse
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
 
 User = get_user_model()
 
@@ -34,10 +37,16 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainPairSerializer
 
-class UserSerializer(ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'is_active', 'is_staff', 'role']  # ✅ include role
+        fields = ['id', 'username', 'email', 'is_active', 'is_staff', 'role']
+        read_only_fields = ['id', 'username', 'email']
+
+# class UserSerializer(ModelSerializer):
+#     class Meta:
+#         model = User
+#         fields = ['id', 'username', 'email', 'is_active', 'is_staff', 'role']  
 
 class UserListView(generics.ListAPIView):
     queryset = User.objects.all()

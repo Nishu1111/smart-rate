@@ -139,9 +139,12 @@ function Dashboard() {
 
     await axios.put(`http://127.0.0.1:8000/api/users/${user.id}/`, {
       is_staff: !user.is_staff,
+      role: !user.is_staff ? 'admin' : 'user'
     }, config);
+
     fetchUsers();
   };
+
 
   // CSV Export
   const exportCSV = () => {
