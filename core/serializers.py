@@ -2,14 +2,15 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
 from .models import Store, Rating
-
 User = get_user_model()
 
 # User Serializer
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'email', 'role')
+        fields = ['id', 'username', 'email', 'is_active', 'is_staff']  
+        read_only_fields = ['id', 'username', 'email']  
 
 #Register Serializer
 class RegisterSerializer(serializers.ModelSerializer):

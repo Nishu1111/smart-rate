@@ -16,6 +16,7 @@ function Login() {
       });
       localStorage.setItem('access', response.data.access);
       localStorage.setItem('refresh', response.data.refresh);
+      localStorage.setItem('role', response.data.role);
       navigate('/dashboard');
     } catch (error) {
       alert('Invalid credentials');
