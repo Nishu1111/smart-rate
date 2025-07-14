@@ -9,7 +9,7 @@ from .views import (
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 router = DefaultRouter()
-router.register(r'stores', StoreViewSet)
+router.register(r'stores', StoreViewSet, basename='store')
 router.register(r'ratings', RatingViewSet)
 
 urlpatterns = [
@@ -23,3 +23,4 @@ urlpatterns = [
 ]
 
 
+urlpatterns += router.urls

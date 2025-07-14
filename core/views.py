@@ -65,8 +65,9 @@ class RegisterAPI(generics.CreateAPIView):
 class StoreViewSet(viewsets.ModelViewSet):
     queryset = Store.objects.all()
     serializer_class = StoreSerializer
-    permission_classes = [permissions.IsAuthenticated]
+#    permission_classes = [permissions.IsAuthenticated]
 
+ 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 

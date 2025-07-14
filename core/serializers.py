@@ -31,7 +31,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 #Store Serializer
 class StoreSerializer(serializers.ModelSerializer):
-    owner = UserSerializer(read_only=True)
+    #owner = UserSerializer(read_only=True)
 
     class Meta:
         model = Store
