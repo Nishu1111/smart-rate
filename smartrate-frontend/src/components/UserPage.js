@@ -1,6 +1,7 @@
 //user page
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Navbar from './Navbar';
 
 function UserPage() {
   const [stores, setStores] = useState([]);
@@ -33,6 +34,7 @@ function UserPage() {
 
   return (
     <div className="p-8">
+        <Navbar />
       <h2 className="text-2xl font-bold mb-4">Welcome, {localStorage.getItem('role')}</h2>
       <h3 className="text-xl mb-4">Browse Stores & Rate</h3>
 

@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import EditStore from './EditStore';
+import Navbar from './Navbar';
 
 function Dashboard() {
   const [stores, setStores] = useState([]);
@@ -82,8 +83,9 @@ function Dashboard() {
 
   return (
     <div className="p-8">
+      <Navbar />
       <h2 className="text-2xl font-bold mb-4">Dashboard</h2>
-
+      <p>Welcome, {localStorage.getItem('username')}</p>
       {/* STORES */}
       <h3 className="text-xl font-semibold mb-2">Stores</h3>
       <ul className="mb-6">
@@ -125,6 +127,24 @@ function Dashboard() {
                             </li>
                        ))}
                     </ul>
+                    <ul>
+  {stores.map(store => (
+    <li key={store.id} className="border p-4 mb-4 rounded shadow">
+      <h3 className="text-lg font-bold">{store.name}</h3>
+      <p>{store.description}</p>
+      {store.image ? (
+        <img
+          src={`http://127.0.0.1:8000${store.image}`}
+          alt={store.name}
+          className="w-32 h-32 object-cover mt-2 rounded"
+        />
+      ) : (
+        <p className="text-gray-500">No image uploaded</p>
+      )}
+    </li>
+  ))}
+</ul>
+
       {/* CSV Export */}
       <button
         onClick={exportCSV}

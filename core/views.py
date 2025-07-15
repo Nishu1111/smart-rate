@@ -30,7 +30,8 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
     def validate(self, attrs):
         data = super().validate(attrs)
         data['role'] = self.user.role
-        data['user_id'] = self.user.id   
+        data['user_id'] = self.user.id 
+        data['username'] = self.user.username  
         return data
 
 class MyTokenObtainPairView(TokenObtainPairView):

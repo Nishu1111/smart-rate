@@ -4,11 +4,12 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css';
 import Home from './components/Home';
-import Register from './components/Register'
+import Register from './components/Register';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import UserPage from './components/UserPage';
 import StoreOwnerPage from './components/StoreOwner';
+
 
 function App() {
   return (

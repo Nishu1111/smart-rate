@@ -21,6 +21,7 @@ function Register() {
   };
 
   return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-100 to-purple-200 flex items-center justify-center">
     <form onSubmit={handleRegister} className="max-w-sm mx-auto mt-10 p-5 border rounded shadow">
       <h2 className="text-xl mb-4">Register</h2>
       <input name="username" placeholder="Username" value={form.username} onChange={handleChange} className="border p-2 mb-2 w-full" />
@@ -34,6 +35,7 @@ function Register() {
       <button type="submit" className="bg-blue-500 text-white p-2 rounded w-full">Register</button>
       <Link to="/login" className="block text-center text-blue-600 mt-2">Back to Login</Link>
     </form>
+    </div>
   );
 }
 

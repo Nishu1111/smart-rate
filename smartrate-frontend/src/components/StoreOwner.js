@@ -1,6 +1,9 @@
 // store owner page
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Navbar from './Navbar';
+
+
 
 function StoreOwnerPage() {
   const [stores, setStores] = useState([]);
@@ -42,6 +45,7 @@ function StoreOwnerPage() {
 
   return (
     <div className="p-8">
+      <Navbar />
       <h2 className="text-2xl font-bold mb-4">Welcome Store Owner, {localStorage.getItem('role')}</h2>
 
       <h3 className="text-xl mb-2">Add New Store</h3>

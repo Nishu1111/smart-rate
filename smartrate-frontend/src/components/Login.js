@@ -21,6 +21,8 @@ function Login() {
     localStorage.setItem('refresh', response.data.refresh);
     localStorage.setItem('role', response.data.role);
     localStorage.setItem('user_id', response.data.user_id);
+    localStorage.setItem('username', response.data.username);
+
 
     //Role-based Redirect
     if (response.data.role === 'admin') {
@@ -35,7 +37,10 @@ function Login() {
     }
   };
 
+  
+
   return (
+    <div className="min-h-screen bg-gradient-to-br from-blue-100 to-purple-200 flex items-center justify-center">
     <form onSubmit={handleLogin} className="max-w-sm mx-auto mt-10 p-5 border rounded shadow">
       <h2 className="text-xl mb-4">Sign in</h2>
       <input name="username" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} className="border p-2 mb-2 w-full" />
@@ -43,6 +48,7 @@ function Login() {
       <button type="submit" className="bg-blue-500 text-white p-2 rounded w-full">Login</button>
       <Link to="/register" className="block text-center text-blue-600 mt-2">Create an account</Link>
     </form>
+    </div>
   );
 }
 
