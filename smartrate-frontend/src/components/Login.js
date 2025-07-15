@@ -1,3 +1,4 @@
+//login page
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
@@ -14,7 +15,7 @@ function Login() {
         username,
         password
       });
-      console.log(response.data); //to verify you get user_id
+      console.log(response.data); //verify you get user_id
 
     localStorage.setItem('access', response.data.access);
     localStorage.setItem('refresh', response.data.refresh);

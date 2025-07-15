@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+# models Register  here.
 from .models import User, Store, Rating
 
 admin.site.register(User)

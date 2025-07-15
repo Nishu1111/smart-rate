@@ -1,3 +1,4 @@
+//root or main components
 import logo from './logo.svg';
 import React from 'react'; 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';

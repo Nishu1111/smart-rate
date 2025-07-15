@@ -27,7 +27,7 @@ function Dashboard() {
       headers: { Authorization: `Bearer ${token}` },
     });
     alert('Store deleted!');
-    window.location.reload(); // Or refresh your state
+    window.location.reload(); // Or refresh state
   };
 
   // Fetch all Users (Admin only)
