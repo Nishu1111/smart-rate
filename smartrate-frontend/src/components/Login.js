@@ -22,7 +22,14 @@ function Login() {
     localStorage.setItem('role', response.data.role);
     localStorage.setItem('user_id', response.data.user_id);
 
+    //Role-based Redirect
+    if (response.data.role === 'admin') {
       navigate('/dashboard');
+    } else if (response.data.role === 'store_owner') {
+      navigate('/storeowner');
+    } else {
+      navigate('/userpage');
+    }
     } catch (error) {
       alert('Invalid credentials');
     }
@@ -42,3 +49,6 @@ function Login() {
 export default Login; 
 
 
+  
+
+  

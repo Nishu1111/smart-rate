@@ -7,7 +7,8 @@ import Home from './components/Home';
 import Register from './components/Register'
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
-
+import UserPage from './components/UserPage';
+import StoreOwnerPage from './components/StoreOwner';
 
 function App() {
   return (
@@ -17,6 +18,8 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/userpage" element={<UserPage />} />
+        <Route path="/storeowner" element={<StoreOwnerPage />} />
       </Routes>
     </Router>
   );
