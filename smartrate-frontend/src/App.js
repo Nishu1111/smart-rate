@@ -9,7 +9,7 @@ import Login from './components/Login';
 import Dashboard from './components/Dashboard';
 import UserPage from './components/UserPage';
 import StoreOwnerPage from './components/StoreOwner';
-
+import EditStore from './components/EditStore';
 
 function App() {
   return (
@@ -21,6 +21,9 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/userpage" element={<UserPage />} />
         <Route path="/storeowner" element={<StoreOwnerPage />} />
+        <Route path="/edit-store/:id" element={<EditStore />} />
+        
+
       </Routes>
     </Router>
   );

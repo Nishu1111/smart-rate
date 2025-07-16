@@ -43,7 +43,7 @@ function UserPage() {
           <h4 className="text-lg font-semibold">{store.name}</h4>
           <p>{store.description}</p>
           {store.image && (
-            <img src={`http://127.0.0.1:8000${store.image}`} alt="store" className="h-40 my-2" />
+            <img src={store.image} alt="store" className="h-40 my-2" />
           )}
 
           <div className="mt-2">

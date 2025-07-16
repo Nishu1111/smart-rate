@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Navbar from './Navbar';
-
+import { Link } from 'react-router-dom';
 
 
 function StoreOwnerPage() {
@@ -79,10 +79,31 @@ function StoreOwnerPage() {
           <h4 className="text-lg font-semibold">{store.name}</h4>
           <p>{store.description}</p>
           {store.image && (
-            <img src={`http://127.0.0.1:8000${store.image}`} alt="store" className="h-40 my-2" />
+            <img src={store.image} alt="store" className="h-40 my-2 object-cover rounded" />
           )}
+          {stores.map(store => (
+  <div key={store.id} className="border p-4 mb-4">
+    <h2 className="text-xl font-bold">{store.name}</h2>
+    <p>{store.description}</p>
+    <img
+      src={store.image}
+      alt="Store"
+      className="w-40 h-40 object-cover rounded"
+    />
+  </div>
+))}
+
+
           {/* TODO: Add Reviews Section */}
           <p className="text-gray-600">Ratings coming next...</p>
+          <Link
+      to={`/edit-store/${store.id}`}
+      className="bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600"
+    >
+      Edit Store
+    </Link>
+    <Link to={`/edit-store/${store.id}`}>Edit</Link>
+
         </div>
       ))}
     </div>
@@ -90,3 +111,6 @@ function StoreOwnerPage() {
 }
 
 export default StoreOwnerPage;
+
+
+

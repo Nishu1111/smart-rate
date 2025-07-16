@@ -11,7 +11,7 @@ function Home() {
         </h1>
         <p className="text-lg text-gray-600 mb-8">
           The smart way to rate, manage, and grow stores. <br />
-          <span className="text-gray-800 font-semibold">Admins</span> control everything, 
+          <span className="text-gray-800 font-semibold">Admin</span> control everything, 
           <span className="text-gray-800 font-semibold"> Store Owners</span> showcase their businesses, 
           and <span className="text-gray-800 font-semibold">Users</span> rate & comment with ease.
         </p>

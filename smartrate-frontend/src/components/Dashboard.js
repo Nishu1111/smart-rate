@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import EditStore from './EditStore';
 import Navbar from './Navbar';
+import { Link } from 'react-router-dom';
 
 function Dashboard() {
   const [stores, setStores] = useState([]);
@@ -112,10 +113,12 @@ function Dashboard() {
                              <h4 className="font-bold">{store.name}</h4>
 
                                 {/* Show the EditStore form */}
-                              <EditStore
-                                storeId={store.id}
-                                onUpdated={() => window.location.reload()}
-                               />
+                              <Link
+                                to={`/edit-store/${store.id}`}
+                                className="bg-blue-600 text-white px-2 py-1 rounded"
+                                >
+                                Edit
+                              </Link>
 
                                {/* Optional: Delete button */}
                                 <button
@@ -134,7 +137,7 @@ function Dashboard() {
       <p>{store.description}</p>
       {store.image ? (
         <img
-          src={`http://127.0.0.1:8000${store.image}`}
+          src={store.image}
           alt={store.name}
           className="w-32 h-32 object-cover mt-2 rounded"
         />
