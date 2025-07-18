@@ -31,7 +31,7 @@ function Dashboard() {
     alert('Store deleted!');
     window.location.reload(); // Or refresh state
   };
-
+    
   // Fetch all Users (Admin only)
   const fetchUsers = async () => {
     const token = localStorage.getItem('access');

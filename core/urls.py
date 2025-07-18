@@ -4,13 +4,15 @@ from rest_framework.routers import DefaultRouter
 from .views import MyTokenObtainPairView
 from .views import (
     RegisterAPI, StoreViewSet, UserUpdateView, UserListView,
-    RatingViewSet, export_ratings_csv
+    RatingViewSet, ProductViewSet, export_ratings_csv
 )
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 router = DefaultRouter()
 router.register(r'stores', StoreViewSet)
 router.register(r'ratings', RatingViewSet)
+router.register(r'products', ProductViewSet, basename='product')
+# router.register(r'items', ItemViewSet)
 
 urlpatterns = [
     path('register/', RegisterAPI.as_view(), name='register'),

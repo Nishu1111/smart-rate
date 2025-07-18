@@ -3,18 +3,16 @@ from rest_framework import generics, permissions, viewsets
 from rest_framework.decorators import api_view
 from django.contrib.auth import get_user_model  
 from rest_framework.serializers import ModelSerializer
-from rest_framework import serializers ####
-
-from .models import Store, Rating
+from rest_framework import serializers #
+from .models import Store, Rating, Product
 from .serializers import (
     RegisterSerializer,
-    StoreSerializer, RatingSerializer
+    StoreSerializer, RatingSerializer, ProductSerializer
 )
 import csv
 from django.http import HttpResponse
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-
 
 User = get_user_model()
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -48,27 +46,40 @@ class StoreSerializer(serializers.ModelSerializer):
     class Meta:
         model = Store
         fields = '__all__'
-
+#user list view
 class UserListView(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAdminUser]
-
+#user update view
 class UserUpdateView(generics.UpdateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAdminUser]
-
+#register 
 class RegisterAPI(generics.CreateAPIView):
     queryset = User.objects.all()
     serializer_class = RegisterSerializer
-
+#store view set
 class StoreViewSet(viewsets.ModelViewSet):
     queryset = Store.objects.all()
     serializer_class = StoreSerializer
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
+
+
+class ProductViewSet(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer
+#item view set
+# class ItemViewSet(viewsets.ModelViewSet):
+#     queryset = Item.objects.all()
+#     serializer_class = ItemSerializer
+#     permission_classes = [permissions.IsAuthenticated]
+
+#     def perform_create(self, serializer):
+#         serializer.save()  
 
 class RatingViewSet(viewsets.ModelViewSet):
     queryset = Rating.objects.all()

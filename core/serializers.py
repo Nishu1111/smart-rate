@@ -1,8 +1,9 @@
 #import serializers to convert in JSON response
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
-from .models import Store, Rating
+from .models import Store, Rating, Product
 User = get_user_model()
+
 
 # User Serializer
 
@@ -30,12 +31,26 @@ class RegisterSerializer(serializers.ModelSerializer):
         return user
 
 #Store Serializer
-class StoreSerializer(serializers.ModelSerializer):
-    #owner = UserSerializer(read_only=True)
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = '__all__'
 
+class StoreSerializer(serializers.ModelSerializer):
+    products = ProductSerializer(many=True, read_only=True)
+    
     class Meta:
         model = Store
         fields = '__all__'
+
+# #item serializer
+# class ItemSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Item
+#         fields = '__all__'
+
+
+
 
 # Rating Serializer
 class RatingSerializer(serializers.ModelSerializer):

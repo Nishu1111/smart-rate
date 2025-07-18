@@ -15,7 +15,7 @@ function Login() {
         username,
         password
       });
-      console.log(response.data); //verify you get user_id
+      console.log(response.data); //verify to get user_id
 
     localStorage.setItem('access', response.data.access);
     localStorage.setItem('refresh', response.data.refresh);
@@ -24,7 +24,7 @@ function Login() {
     localStorage.setItem('username', response.data.username);
 
 
-    //Role-based Redirect
+    //Role-based Redirect page
     if (response.data.role === 'admin') {
       navigate('/dashboard');
     } else if (response.data.role === 'store_owner') {
@@ -53,6 +53,8 @@ function Login() {
 }
 
 export default Login; 
+
+    
 
 
   
