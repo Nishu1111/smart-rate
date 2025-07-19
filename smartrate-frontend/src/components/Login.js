@@ -23,7 +23,7 @@ function Login() {
     localStorage.setItem('user_id', response.data.user_id);
     localStorage.setItem('username', response.data.username);
 
-
+    
     //Role-based Redirect page
     if (response.data.role === 'admin') {
       navigate('/dashboard');

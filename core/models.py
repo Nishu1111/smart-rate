@@ -22,11 +22,13 @@ class Store(models.Model):
     image = models.ImageField(upload_to='store_images/', null=True, blank=True)
     # owner = models.ForeignKey('auth.User', on_delete=models.CASCADE, related_name='stores')
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+
 class Product(models.Model):
     store = models.ForeignKey(Store, related_name='products', on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=8, decimal_places=2)
     description = models.TextField(blank=True, null=True)
+    discount = models.DecimalField(max_digits=5, decimal_places=2, default=0)   
     created_at = models.DateTimeField(auto_now_add=True)
 
 #rating model

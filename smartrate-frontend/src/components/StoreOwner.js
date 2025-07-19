@@ -12,24 +12,37 @@ function StoreOwnerPage() {
   const token = localStorage.getItem('access');
   const userId = parseInt(localStorage.getItem('user_id'));
 
+  // const fetchMyStores = async () => {
+  //   const config = { headers: { Authorization: `Bearer ${token}` } };
+  //   const res = await axios.get('http://127.0.0.1:8000/api/stores/', config);
+  //   const myStores = res.data
+  //     .filter(store => store.owner === userId)
+  //     .map(store => ({
+  //       ...store,
+  //       products: store.products || [],
+  //       newProductName: '',
+  //       newProductPrice: '',
+  //       newProductDiscount: ''
+  //     }));
+  //   setStores(myStores);
+  // };
   const fetchMyStores = async () => {
-    const config = { headers: { Authorization: `Bearer ${token}` } };
-    const res = await axios.get('http://127.0.0.1:8000/api/stores/', config);
-    const myStores = res.data
-      .filter(store => store.owner === userId)
-      .map(store => ({
-        ...store,
-        products: store.products || [],
-        newProductName: '',
-        newProductPrice: '',
-        newProductDiscount: ''
+  const config = { headers: { Authorization: `Bearer ${token}` } };
+  const res = await axios.get('http://127.0.0.1:8000/api/stores/', config);
+  console.log('Fetched stores:', res.data);
+  const myStores = res.data.filter(store => store.owner === userId)
+    .map(store => ({
+      ...store,
+      newProductName: '',
+      newProductPrice: '',
+      newProductDiscount: ''
       }));
     setStores(myStores);
   };
-
   useEffect(() => {
     fetchMyStores();
   }, []);
+
 
   const handleAddStore = async () => {
     const formData = new FormData();
@@ -53,21 +66,46 @@ function StoreOwnerPage() {
     setNewImage(null);
     fetchMyStores();
   };
-
   const handleAddProduct = async (store) => {
+  // console.log("Posting product:", {
+  //   store: store.id,
+  //   name: store.newProductName,
+  //   price: store.newProductPrice,
+  //   discount: store.newProductDiscount,  
+  //   description: store.newProductDescription 
+  // });
+  try {
     await axios.post('http://127.0.0.1:8000/api/products/', {
       store: store.id,
       name: store.newProductName,
       price: store.newProductPrice,
-      discount: store.newProductDiscount
+      discount: store.newProductDiscount,
+      description: store.newProductDescription  
     }, {
       headers: { Authorization: `Bearer ${token}` }
     });
-
     alert('Product added!');
     fetchMyStores();
-  };
+  } catch (error) {
+    console.log(error.response.data); 
+    alert("Add Product failed");
+  }
+};
 
+  // const handleAddProduct = async (store) => {
+  //   await axios.post('http://127.0.0.1:8000/api/products/', {
+  //     store: store.id,
+  //     name: store.newProductName,
+  //     price: store.newProductPrice,
+  //     discount: store.newProductDiscount
+  //   }, {
+  //     headers: { Authorization: `Bearer ${token}` }
+  //   });
+
+  //   alert('Product added!');
+  //   fetchMyStores();
+  // };
+  
   return (
     <div className="p-8">
       <Navbar />
@@ -123,7 +161,6 @@ function StoreOwnerPage() {
           >
             Edit Store
           </Link>
-
           {/* Add Product */}
           <h5 className="font-semibold mb-2">Add Product</h5>
           <input

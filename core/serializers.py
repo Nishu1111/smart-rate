@@ -43,6 +43,7 @@ class StoreSerializer(serializers.ModelSerializer):
         model = Store
         fields = '__all__'
 
+
 # #item serializer
 # class ItemSerializer(serializers.ModelSerializer):
 #     class Meta:
@@ -60,3 +61,4 @@ class RatingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rating
         fields = '__all__'
+

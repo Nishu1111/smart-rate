@@ -32,7 +32,7 @@ function EditStore() {
     const formData = new FormData();
     formData.append('name', name);
     formData.append('description', description);
-    formData.append('owner', parseInt(localStorage.getItem('user_id')));
+    //formData.append('owner', parseInt(localStorage.getItem('user_id')));
     if (image) {
       formData.append('image', image);
     }
